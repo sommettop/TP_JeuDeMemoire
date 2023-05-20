@@ -14,6 +14,7 @@ public class JeuVue extends JFrame {
     private JList<Object> vueCartes;
     private final int PANEL_WIDTH = 780;
     private final int PANEL_HEIGHT = 630;
+    private JeuMenuBar jeuMenuBar = new JeuMenuBar();
     public static final Color COULEUR_VERSO = new Color(61, 47, 148);
 
     /**
@@ -45,6 +46,7 @@ public class JeuVue extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         add(layeredPane);
+        this.setJMenuBar(jeuMenuBar);
         pack();
         setLocationRelativeTo(null);
     }
@@ -77,8 +79,9 @@ public class JeuVue extends JFrame {
     /**
      * Méthode pour commencer une nouvelle partie.
      */
-    public void nouvellePartie(){
-        modelVueCartes.clear();;
+    public void nouvellePartie() {
+        modelVueCartes.clear();
+        ;
     }
 
     /**
@@ -93,6 +96,14 @@ public class JeuVue extends JFrame {
         });
         notificationPanel.setBounds(0, 0, layeredPane.getWidth(), layeredPane.getHeight());
         layeredPane.add(notificationPanel, JLayeredPane.POPUP_LAYER);
+    }
+
+
+
+
+
+    public JeuMenuBar getJeuMenuBar() {
+        return jeuMenuBar;
     }
 
 

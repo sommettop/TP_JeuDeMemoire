@@ -20,7 +20,7 @@ public class JeuControlleur {
      * Constructeur pour JeuControlleur.
      *
      * @param modele Le modèle du jeu.
-     * @param vue La vue du jeu.
+     * @param vue    La vue du jeu.
      */
     public JeuControlleur(JeuMemoire modele, JeuVue vue) {
         this.modele = modele;
@@ -90,6 +90,12 @@ public class JeuControlleur {
             vue.getModelVueCartes().addElement(JeuVue.COULEUR_VERSO);
         }
         vue.showVue();
+    }
+
+
+    private void initMenuListeners() {
+        vue.getJeuMenuBar().getQuitItem().addActionListener(e -> System.exit(0));
+        vue.getJeuMenuBar().getResetItem().addActionListener(e -> rejouer());
     }
 
 }
