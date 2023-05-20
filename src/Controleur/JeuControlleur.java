@@ -2,6 +2,7 @@ package Controleur;
 
 import Modele.JeuMemoire;
 import Vue.JeuVue;
+import Vue.VictoryNotificationPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,14 +35,6 @@ public class JeuControlleur {
      * Initialise le controlleur.
      */
     public void initController() {
-
-
-        System.out.println(vue.getVueCartes().getMouseListeners().length);
-        // remove old MouseListener first
-//        for (MouseListener ml : vue.getVueCartes().getMouseListeners()) {
-//            System.out.println(ml);
-//        }
-
         vue.getVueCartes().addMouseListener(new CarteMouseAdapter(this));
         initMenuListeners();
         prepareVue();
@@ -71,10 +64,20 @@ public class JeuControlleur {
     public void rejouer() {
         modele.nouvellePartie();
         vue.nouvellePartie();
-        // remove old MouseListener first
+
+        JLayeredPane layeredPane = vue.getLayeredPane();
+        Component[] components = layeredPane.getComponentsInLayer(JLayeredPane.POPUP_LAYER);
+        for (Component component : components) {
+            if (component instanceof VictoryNotificationPanel) {
+                layeredPane.remove(component);
+            }
+        }
+        layeredPane.repaint();
+
         for (MouseListener ml : vue.getVueCartes().getMouseListeners()) {
             vue.getVueCartes().removeMouseListener(ml);
         }
+
         vue.getVueCartes().addMouseListener(new CarteMouseAdapter(this));
         prepareVue();
     }

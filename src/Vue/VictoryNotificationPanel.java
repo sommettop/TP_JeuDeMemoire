@@ -40,8 +40,6 @@ public class VictoryNotificationPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                onReplayClicked.run();
-               layeredPane.remove(VictoryNotificationPanel.this);
-               layeredPane.repaint();
             }
             @Override
             public void mouseEntered(MouseEvent e) {

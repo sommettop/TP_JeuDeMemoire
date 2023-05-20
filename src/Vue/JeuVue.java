@@ -81,7 +81,7 @@ public class JeuVue extends JFrame {
      */
     public void nouvellePartie() {
         modelVueCartes.clear();
-        ;
+
     }
 
     /**
