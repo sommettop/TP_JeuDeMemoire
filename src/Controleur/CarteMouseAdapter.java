@@ -49,11 +49,17 @@ public class CarteMouseAdapter extends MouseAdapter {
             return;
 
         if (e.getClickCount() == 1) {
+
             int selectedIndex = vueCartes.locationToIndex(e.getPoint());
 
             if (listRetournee.contains(selectedIndex)) {
                 e.consume();
             } else {
+
+                if(!controlleur.getJeuTimer().isRunning()){
+                    controlleur.getJeuTimer().start();
+                }
+
                 modelVueCartes.set(selectedIndex, imageCartes.get(selectedIndex));
                 times++;
                 if (times % 2 == 0) {
@@ -62,6 +68,7 @@ public class CarteMouseAdapter extends MouseAdapter {
                         retournerCarte(selectedIndex);
                         isPaused = false;
                         if (controlleur.getModele().estTermine()) {
+                            controlleur.getJeuTimer().stop();
                             controlleur.getVue().showVictoryNotification(controlleur.getVue().getLayeredPane(), controlleur);
                         }
                     });

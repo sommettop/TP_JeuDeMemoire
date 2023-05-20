@@ -13,9 +13,12 @@ public class JeuVue extends JFrame {
     private DefaultListModel<Object> modelVueCartes;
     private JList<Object> vueCartes;
     private final int PANEL_WIDTH = 780;
-    private final int PANEL_HEIGHT = 650;
+    private final int PANEL_HEIGHT = 675;
     private JeuMenuBar jeuMenuBar = new JeuMenuBar();
+    private JLabel timerLabel;
+    private MessageNotification messageNotification = new MessageNotification();
     public static final Color COULEUR_VERSO = new Color(61, 47, 148);
+
 
     /**
      * Constructeur par défaut pour la classe JeuVue.
@@ -34,11 +37,13 @@ public class JeuVue extends JFrame {
         vueCartes.setFixedCellHeight(156);
         vueCartes.setCellRenderer(new CarteCellRenderer());
 
-        JLabel gameTimer = new JLabel("test timer");
+        timerLabel = new JLabel("Time:0");
+        timerLabel.setFont(new Font("Arial", Font.BOLD, 40));
+        timerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-//        panel.setLayout(new BorderLayout());
+        panel.setLayout(new BorderLayout());
         panel.add(vueCartes, BorderLayout.CENTER);
-//        panel.add(gameTimer,BorderLayout.SOUTH);
+        panel.add(timerLabel,BorderLayout.SOUTH);
         panel.setBounds(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
 
         layeredPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -103,10 +108,30 @@ public class JeuVue extends JFrame {
 
 
 
+    public void aboutMessage(){
+        String message = "Jeu de Mémoire\n\nVersion 0.2\n\n© 2023 SHANG LI";
+        messageNotification.showMessage(this,"À propos",message);
+    }
+
+
+    public void instructionMessage(){
+        String message = "C'est un jeu de mémoire où vous devez retourner les cartes.\n" +
+                "Au début du jeu, toutes les cartes sont face cachée.\n" +
+                "Vous devez retourner deux cartes à la fois.\n" +
+                "Si les deux cartes ont le même image, vous pouvez les conserver.\n" +
+                "Sinon, vous devez les retourner face cachée à nouveau.\n" +
+                "L'objectif du jeu est de retourner toutes les cartes en trouvant les paires correspondantes.\n" +
+                "Bonne chance !";
+        messageNotification.showMessage(this,"Instructions",message);
+    }
 
 
     public JeuMenuBar getJeuMenuBar() {
         return jeuMenuBar;
+    }
+
+    public JLabel getTimerLabel() {
+        return timerLabel;
     }
 
 
