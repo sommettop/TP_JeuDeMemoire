@@ -5,6 +5,7 @@ import Vue.JeuVue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,16 @@ public class JeuControlleur {
      * Initialise le controlleur.
      */
     public void initController() {
+
+
+        System.out.println(vue.getVueCartes().getMouseListeners().length);
+        // remove old MouseListener first
+//        for (MouseListener ml : vue.getVueCartes().getMouseListeners()) {
+//            System.out.println(ml);
+//        }
+
         vue.getVueCartes().addMouseListener(new CarteMouseAdapter(this));
+        initMenuListeners();
         prepareVue();
     }
 
@@ -61,7 +71,12 @@ public class JeuControlleur {
     public void rejouer() {
         modele.nouvellePartie();
         vue.nouvellePartie();
-        initController();
+        // remove old MouseListener first
+        for (MouseListener ml : vue.getVueCartes().getMouseListeners()) {
+            vue.getVueCartes().removeMouseListener(ml);
+        }
+        vue.getVueCartes().addMouseListener(new CarteMouseAdapter(this));
+        prepareVue();
     }
 
     /**

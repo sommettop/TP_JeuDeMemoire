@@ -31,7 +31,7 @@ public class JeuMemoire implements JeuCartes {
             cartes.add(new Carte(valeur));
             cartes.add(new Carte(valeur));
         }
-        Collections.shuffle(cartes);
+//        Collections.shuffle(cartes);
     }
 
     /**
