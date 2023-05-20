@@ -6,6 +6,8 @@ import Vue.VictoryNotificationPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,6 +116,30 @@ public class JeuControlleur {
     private void initMenuListeners() {
         vue.getJeuMenuBar().getQuitItem().addActionListener(e -> System.exit(0));
         vue.getJeuMenuBar().getResetItem().addActionListener(e -> rejouer());
+        vue.getJeuMenuBar().getApropItem().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String message = "My Application\n\nVersion 1.0\n\n© 2023 My Company";
+                JOptionPane.showMessageDialog(vue, message, "About", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        });
+
+
+        vue.getJeuMenuBar().getInstItem().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String message = "C'est un jeu de mémoire où vous devez retourner les cartes.\n" +
+                        "Au début du jeu, toutes les cartes sont face cachée.\n" +
+                        "Vous devez retourner deux cartes à la fois.\n" +
+                        "Si les deux cartes ont le même image, vous pouvez les conserver.\n" +
+                        "Sinon, vous devez les retourner face cachée à nouveau.\n" +
+                        "L'objectif du jeu est de retourner toutes les cartes en trouvant les paires correspondantes.\n" +
+                        "Bonne chance !";
+                JOptionPane.showMessageDialog(vue, message, "Instructions", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        });
     }
 
 }

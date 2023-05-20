@@ -13,7 +13,7 @@ public class JeuVue extends JFrame {
     private DefaultListModel<Object> modelVueCartes;
     private JList<Object> vueCartes;
     private final int PANEL_WIDTH = 780;
-    private final int PANEL_HEIGHT = 630;
+    private final int PANEL_HEIGHT = 650;
     private JeuMenuBar jeuMenuBar = new JeuMenuBar();
     public static final Color COULEUR_VERSO = new Color(61, 47, 148);
 
@@ -34,8 +34,11 @@ public class JeuVue extends JFrame {
         vueCartes.setFixedCellHeight(156);
         vueCartes.setCellRenderer(new CarteCellRenderer());
 
-        panel.setLayout(new BorderLayout());
+        JLabel gameTimer = new JLabel("test timer");
+
+//        panel.setLayout(new BorderLayout());
         panel.add(vueCartes, BorderLayout.CENTER);
+//        panel.add(gameTimer,BorderLayout.SOUTH);
         panel.setBounds(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
 
         layeredPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
