@@ -42,10 +42,10 @@ public class JeuControlleur {
         vue.getVueCartes().addMouseListener(new CarteMouseAdapter(this));
         initMenuListeners();
         elapsedTime = 0;
-        vue.getTimerLabel().setText("Temps : " + 0 + " s");
+        vue.updateTimerLabel(elapsedTime);
         jeuTimer = new Timer(1000, e -> {
             elapsedTime++;
-            vue.getTimerLabel().setText("Temps : " + elapsedTime + " s");
+            vue.updateTimerLabel(elapsedTime);
         });
         prepareVue();
     }
@@ -122,20 +122,30 @@ public class JeuControlleur {
         vue.showVue();
     }
 
-
+    /**
+     * Retourne le Timer du jeu.
+     *
+     * @return Le Timer du jeu.
+     */
     public Timer getJeuTimer() {
         return jeuTimer;
     }
 
-
+    /**
+     * Réinitialise le Timer du jeu. Si le Timer est en cours d'exécution, il est arrêté.
+     * Le temps écoulé est remis à zéro et le label du Timer dans la vue est mis à jour.
+     */
     private void resetJeuTimer() {
-        elapsedTime = 0;
-        vue.getTimerLabel().setText("Temps : " + 0 + " s");
         if (jeuTimer.isRunning()) {
             jeuTimer.stop();
         }
+        elapsedTime = 0;
+        vue.updateTimerLabel(elapsedTime);
     }
 
+    /**
+     * Initialise les listeners du menu.
+     */
     private void initMenuListeners() {
         vue.getJeuMenuBar().getQuitItem().addActionListener(e -> System.exit(0));
         vue.getJeuMenuBar().getResetItem().addActionListener(e -> rejouer());

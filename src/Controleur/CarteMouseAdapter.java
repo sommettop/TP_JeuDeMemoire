@@ -59,6 +59,7 @@ public class CarteMouseAdapter extends MouseAdapter {
                 if(!controlleur.getJeuTimer().isRunning()){
                     controlleur.getJeuTimer().start();
                 }
+                controlleur.getVue().getFlipSound().play();
 
                 modelVueCartes.set(selectedIndex, imageCartes.get(selectedIndex));
                 times++;
@@ -69,6 +70,7 @@ public class CarteMouseAdapter extends MouseAdapter {
                         isPaused = false;
                         if (controlleur.getModele().estTermine()) {
                             controlleur.getJeuTimer().stop();
+                            controlleur.getVue().getWinSound().play();
                             controlleur.getVue().showVictoryNotification(controlleur.getVue().getLayeredPane(), controlleur);
                         }
                     });
@@ -87,6 +89,7 @@ public class CarteMouseAdapter extends MouseAdapter {
      * @param index L'index de la carte à retourner.
      */
     private void retournerCarte(int index) {
+
         controlleur.getModele().retournerCarte(index);
         listRetournee.clear();
         for (int i = 0; i < cartes.size(); i++) {
